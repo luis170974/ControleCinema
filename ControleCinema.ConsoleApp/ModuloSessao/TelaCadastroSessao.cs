@@ -36,18 +36,18 @@ namespace ControleCinema.ConsoleApp.ModuloSessao
 
         public void Inserir()
         {
-            MostrarTitulo("Cadastro de Filme");
+            MostrarTitulo("Cadastro de Sessão");
 
             Sessao novaSessao = ObterSessao();
 
             _repositorioSessao.Inserir(novaSessao);
 
-            _notificador.ApresentarMensagem("Filme cadastrado com sucesso!", TipoMensagem.Sucesso);
+            _notificador.ApresentarMensagem("Sessão cadastrado com sucesso!", TipoMensagem.Sucesso);
         }
 
         public void Editar()
         {
-            MostrarTitulo("Editando Filme");
+            MostrarTitulo("Editando Sessão");
 
             bool temSessaoCadastrada = VisualizarRegistros("Pesquisando");
 
@@ -71,7 +71,7 @@ namespace ControleCinema.ConsoleApp.ModuloSessao
 
         public void Excluir()
         {
-            MostrarTitulo("Excluindo Filme");
+            MostrarTitulo("Excluindo Sessão");
 
             bool temFilmeRegistrado = VisualizarRegistros("Pesquisando");
 
@@ -94,7 +94,7 @@ namespace ControleCinema.ConsoleApp.ModuloSessao
         public bool VisualizarRegistros(string tipoVisualizacao)
         {
             if (tipoVisualizacao == "Tela")
-                MostrarTitulo("Visualização de Filmes");
+                MostrarTitulo("Visualização de Sessões");
 
             List<Sessao> sessoes = _repositorioSessao.SelecionarTodos();
 
