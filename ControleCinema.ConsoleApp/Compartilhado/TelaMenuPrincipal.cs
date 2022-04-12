@@ -48,7 +48,7 @@ namespace ControleCinema.ConsoleApp.Compartilhado
             telaCadastroSalaCinema = new TelaCadastroSalaCinema(repositorioSalaCinema, notificador);
 
             repositorioSessao = new RepositorioSessao();
-            telaCadastroSessao = new TelaCadastroSessao( repositorioSessao, notificador, repositorioSalaCinema, telaCadastroSalaCinema, repositorioIngresso, _ingresso);
+            telaCadastroSessao = new TelaCadastroSessao( repositorioSessao, notificador, repositorioSalaCinema, telaCadastroSalaCinema, repositorioIngresso, _ingresso, repositorioFilme, telaCadastroFilme);
 
         }
 

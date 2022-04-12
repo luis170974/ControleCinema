@@ -1,11 +1,13 @@
 ﻿using ControleCinema.ConsoleApp.Compartilhado;
 using ControleCinema.ConsoleApp.ModuloSalaCinema;
 using ControleCinema.ConsoleApp.ModuloIngresso;
+using ControleCinema.ConsoleApp.ModuloFilme;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace ControleCinema.ConsoleApp.ModuloSessao
 {
@@ -16,10 +18,12 @@ namespace ControleCinema.ConsoleApp.ModuloSessao
         private readonly IRepositorio<SalaCinema> _repositorioSalaCinema;
         private readonly TelaCadastroSalaCinema _telaCadastroSalaCinema;
         private readonly IRepositorio<Ingresso> _repositorioIngresso;
+        private readonly IRepositorio<Filme> _repositorioFilme;
+        private readonly TelaCadastroFilme _telaCadastroFilme;
         private readonly Ingresso _ingresso;
 
 
-        public TelaCadastroSessao(IRepositorio<Sessao> sessao, Notificador notificador, IRepositorio<SalaCinema> repositorioSalaCinema, TelaCadastroSalaCinema telaCadastroSalaCinema, IRepositorio<Ingresso> ingressos, Ingresso ingresso)
+        public TelaCadastroSessao(IRepositorio<Sessao> sessao, Notificador notificador, IRepositorio<SalaCinema> repositorioSalaCinema, TelaCadastroSalaCinema telaCadastroSalaCinema, IRepositorio<Ingresso> ingressos, Ingresso ingresso, IRepositorio<Filme> repositorioFilme, TelaCadastroFilme telaCadastroFilme)
             : base("Cadastro de Sala de Cinema")
         {
 
@@ -29,6 +33,8 @@ namespace ControleCinema.ConsoleApp.ModuloSessao
             _telaCadastroSalaCinema = telaCadastroSalaCinema;
             _repositorioIngresso = ingressos;
             _ingresso = ingresso;
+            _repositorioFilme = repositorioFilme;
+            _telaCadastroFilme = telaCadastroFilme;
 
 
         }
@@ -129,7 +135,15 @@ namespace ControleCinema.ConsoleApp.ModuloSessao
 
             DateTime horario = Convert.ToDateTime(Console.ReadLine());
 
-            return new Sessao(mostraSalaEscolhida, horario);
+            bool mostrarFilmes = _telaCadastroFilme.VisualizarRegistros("Tela");
+
+            Console.WriteLine("Digite o filme que deseja escolher");
+
+            int idFilme = int.Parse(Console.ReadLine());
+
+            Filme mostrarFilme = _repositorioFilme.SelecionarRegistro(idFilme);
+
+            return new Sessao(mostraSalaEscolhida, horario, mostrarFilme);
         }
         
 
